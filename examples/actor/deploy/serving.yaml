@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actor-serving
+  labels:
+    app: actor-serving
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: actor-serving
+  template:
+    metadata:
+      labels:
+        app: actor-serving
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "actor-serving"
+        dapr.io/app-port: "8080"
+        dapr.io/log-level: "debug"
+    spec:
+      containers:
+        - name: actor-serving
+          image: dotjson/actor-serving:latest
+          imagePullPolicy: Always
+          command: ["./serving"]

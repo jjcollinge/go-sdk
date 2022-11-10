@@ -22,3 +22,6 @@ vendor
 # docs 
 golang.org
 coverage.txt
+
+**/redis.yaml
+**/dist/**

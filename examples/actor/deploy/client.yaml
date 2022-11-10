@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: actor-client
+  labels:
+    app: actor-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: actor-client
+  template:
+    metadata:
+      labels:
+        app: actor-client
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/app-id: "actor-client"
+        dapr.io/log-level: "debug"
+    spec:
+      containers:
+        - name: actor-client
+          image: dotjson/actor-client:latest
+          imagePullPolicy: Always
+          command: ["./client"]
